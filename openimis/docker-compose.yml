@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  #TODO: Make openIMIS web service
+  # openimis:
+  #   container_name: openimis_web
+  #   build:
+  #       context: openimis
+  #   depends_on:
+  #     - mssql
+
+  mssql:
+    container_name: openimis_db
+    build:
+      context: ./mssql
+      dockerfile: Dockerfile
+    environment:
+      SA_PASSWORD: yourStrong(!)Password
+      MSSQL_DBNAME: openimis
+    ports:
+      - 1433:1433
+      - 1434:1434
+    volumes:
+      - mssql-data:/var/opt/mssql/data
+
+volumes:
+  mssql-data:
